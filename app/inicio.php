@@ -1,3 +1,6 @@
 <?php
-print "<h1>Hola Mundo2</h1>";
+// print "<h1>Hola Mundo de la Escuela Melisa Valquiria</h1>"; solo era para probar luego se borra
+require_once __DIR__ . '/libs/mariadb.php';
+require_once __DIR__ . '/libs/control.php';
+$db = new Mariadb();
 ?>

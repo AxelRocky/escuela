@@ -1,7 +1,7 @@
 <?php
-require_once("../app/inicio.php");
-//$control = new Control();
+require_once __DIR__ . '/../app/inicio.php';
 
+$control = new Control();
 
 
 
