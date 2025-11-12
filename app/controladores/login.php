@@ -2,7 +2,7 @@
 /**
  * 
  */
-class Login
+class Login extends controlador
 {
 	
 	function __construct()
@@ -12,7 +12,7 @@ class Login
 
 	public function caratula($value='')
 	{
-		print "Bienvenid@ al sistema de control escolar desde la clase login";
+		print "Bienvenid@ al sistema de control escolar funcionando como se debe";
 	}
 }
 
