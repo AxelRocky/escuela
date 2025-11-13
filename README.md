@@ -12,9 +12,12 @@ D:\WebProjects\escuela
         └── login.php
     └── libs/
         └── control.php
+        └── controlador.php
         └── mariadb.php
     └── modelos/
+        └── loginmodelo.php
     └── vistas/
+        └── loginCaratulaVista.php
 └── public/
     └── index.php
     └── css/
