@@ -17,7 +17,12 @@ D:\WebProjects\escuela
     └── modelos/
         └── loginmodelo.php
     └── vistas/
-        └── loginCaratulaVista.php
+        └── login/
+            └── caratula.php
+            └── mensaje.php
+            └── olvido.php
+        └── encabezado.php
+        └── piepagina.php
 └── public/
     └── index.php
     └── css/
@@ -25,6 +30,10 @@ D:\WebProjects\escuela
     └── img/
     └── js/
     └── temarios/
+└── vendor/                
+    └── phpmailer/
+    └── autoload.php
+└── composer.json
         
 
 /var/www/html/escuela/

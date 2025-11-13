@@ -1,47 +1,59 @@
 <?php
-
 class Login extends Controlador
 {
     private $modelo;
 
-    function __construct()
+    public function __construct()
     {
-        // Carga el modelo correspondiente (LoginModelo)
-        $this->modelo = $this->modelo("LoginModelo");
+        $this->modelo = $this->modelo("EntradaModelo");
     }
 
-    // Muestra la vista del formulario de login
     public function caratula()
     {
-        $this->vista("login/caratula");
+        $datos = [
+            "titulo" => "Login de usuario",
+            "subtitulo" => "Bienvenido al Sistema Escolar"
+        ];
+        $this->vista("login/caratula", $datos);
     }
 
-    // Procesa el formulario enviado por POST
-    public function autenticar()
+    public function olvido()
     {
-        // Verificamos si se enviaron datos
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $errores = [];
+        $mensaje = "";
 
-            // Sanitizamos los datos recibidos
-            $usuario = htmlspecialchars($_POST['usuario'] ?? '');
-            $clave   = htmlspecialchars($_POST['clave'] ?? '');
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $correo = trim($_POST["usuario"]);
 
-            if ($usuario && $clave) {
-                // Por ahora solo mostramos lo que se envió
-                echo "Usuario recibido: {$usuario}<br>";
-                echo "Contraseña recibida: {$clave}<br>";
-
-                // 🟢 Futuro: aquí puedes llamar al modelo para validar el usuario
-                // $resultado = $this->modelo->validarUsuario($usuario, $clave);
-                // if ($resultado) { ... }
-
+            if (empty($correo)) {
+                $errores[] = "Debes escribir tu correo electrónico.";
+            } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+                $errores[] = "El correo electrónico no tiene un formato válido.";
             } else {
-                echo "⚠️ Debes llenar ambos campos.";
+                $usuario = $this->modelo->validarCorreo($correo);
+                if (!$usuario || count($usuario) == 0) {
+                    $errores[] = "El correo no está registrado.";
+                }
             }
-        } else {
-            echo "Método de acceso no permitido.";
+
+            if (empty($errores)) {
+                $enviado = $this->modelo->enviarCorreo($correo);
+                if ($enviado) {
+                    $mensaje = "✅ Correo enviado correctamente a <strong>$correo</strong>.";
+                } else {
+                    $errores[] = "❌ No se pudo enviar el correo.";
+                }
+            }
         }
+
+        $datos = [
+            "titulo" => "Recuperar acceso",
+            "subtitulo" => "Olvidé mi contraseña",
+            "errores" => $errores,
+            "mensaje" => $mensaje
+        ];
+
+        $this->vista("login/mensaje", $datos);
     }
 }
 ?>
-
