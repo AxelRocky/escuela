@@ -3,7 +3,7 @@ class Mariadb
 {
 	private $host = "localhost";
 	private $usuario = "axel";
-	private $clave = "chupi";
+	private $clave = "chuwy";
 	private $db = "escuela";
 	private $puerto = "3306";
 	private $conn;
